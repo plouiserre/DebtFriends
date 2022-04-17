@@ -3,5 +3,8 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Print("Hello world \n")
+	trip := Trip{
+		Name: "Holidays",
+	}
+	fmt.Printf("trip %s created \n", trip.Name)
 }
