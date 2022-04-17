@@ -9,6 +9,6 @@ func TestFriendName(t *testing.T) {
 		FirstName: "Harry",
 	}
 	if friend.FirstName != "Harry" {
-		t.Fatalf("TripNameTest fail because Name of Trip is not equal to %s but to %s", "Harry", friend.FirstName)
+		t.Fatalf("TestFriendName fail because Name of Trip is not equal to %s but to %s", "Harry", friend.FirstName)
 	}
 }
