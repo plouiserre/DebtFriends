@@ -6,10 +6,18 @@ type Trip struct {
 	Activities []Activity
 }
 
-func (t *Trip) AddFriends(friends []Friend) {
-	t.Friends = append(t.Friends, friends...)
-}
-
 func (t *Trip) AddActivities(activities []Activity) {
 	t.Activities = append(t.Activities, activities...)
+	var fs []Friend
+	for _, activity := range t.Activities {
+		for _, f := range activity.Friends {
+			present := Contains(fs, f)
+			if present {
+				continue
+			} else {
+				fs = append(fs, f)
+			}
+		}
+	}
+	t.Friends = fs
 }

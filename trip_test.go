@@ -13,30 +13,6 @@ func TestTripName(t *testing.T) {
 	}
 }
 
-func TestFriendsTrip(t *testing.T) {
-	firstFriend := Friend{
-		FirstName: "Ron",
-	}
-	secondFriend := Friend{
-		FirstName: "Hermione",
-	}
-	thirdFriend := Friend{
-		FirstName: "Harry",
-	}
-	var friends []Friend
-	friends = append(friends, firstFriend, secondFriend, thirdFriend)
-
-	trip := Trip{
-		Name: "holidays",
-	}
-
-	trip.AddFriends(friends)
-
-	if len(trip.Friends) != 3 {
-		t.Fatalf("TestFriendsTrip fails because Friends of the trip %s have the length %d and %d is waited", trip.Name, len(trip.Friends), 3)
-	}
-}
-
 func TestActivityTrip(t *testing.T) {
 	firstFriend := Friend{
 		FirstName: "Ron",
@@ -53,8 +29,6 @@ func TestActivityTrip(t *testing.T) {
 	trip := Trip{
 		Name: "Hogwarts",
 	}
-
-	trip.AddFriends(friends)
 
 	firstActivity := Activity{
 		Name:  "Drink Beers",
@@ -77,5 +51,32 @@ func TestActivityTrip(t *testing.T) {
 
 	if len(trip.Activities) != 2 {
 		t.Fatalf("TestActivityTrip fails because Activities of the trip %s are %d and %d is waited", trip.Name, len(trip.Activities), 2)
+	}
+}
+
+func TestTripDeterminedFriends(t *testing.T) {
+	u := Util{}
+	trip := Trip{
+		Name: "Hogwarts",
+	}
+
+	activities := u.InitActivity()
+
+	trip.AddActivities(activities)
+
+	if len(trip.Friends) != 4 {
+		t.Fatalf("TestTripDeterminedFriends fails because Friends of the trip %s are %d and %d is waited", trip.Name, len(trip.Friends), 4)
+	}
+	CheckFriendsPresent(t, trip.Friends, u.FirstFriend)
+	CheckFriendsPresent(t, trip.Friends, u.SecondFriend)
+	CheckFriendsPresent(t, trip.Friends, u.ThirdFriend)
+	CheckFriendsPresent(t, trip.Friends, u.FourthFriend)
+
+}
+
+func CheckFriendsPresent(t *testing.T, fs []Friend, f Friend) {
+	friendPresent := Contains(fs, f)
+	if !friendPresent {
+		t.Fatalf("TestTripDeterminedFriends fails because %s is missing", f.FirstName)
 	}
 }
