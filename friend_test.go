@@ -4,11 +4,15 @@ import (
 	"testing"
 )
 
-func TestFriendName(t *testing.T) {
+func TestFriendNameExpense(t *testing.T) {
 	friend := Friend{
-		FirstName: "Harry",
+		FirstName:      "Harry",
+		VirtualExpense: 298.23,
 	}
 	if friend.FirstName != "Harry" {
-		t.Fatalf("TestFriendName fail because Name of Trip is not equal to %s but to %s", "Harry", friend.FirstName)
+		t.Fatalf("TestFriendNameExpense fail because his/her firstname is not equal to %s but to %s", "Harry", friend.FirstName)
+	}
+	if friend.VirtualExpense != 298.23 {
+		t.Fatalf("TestFriendNameExpense fail because his/her expense is not equal to %s but to %f", "Harry", friend.VirtualExpense)
 	}
 }

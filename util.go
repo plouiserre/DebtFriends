@@ -16,7 +16,7 @@ func Contains(fs []Friend, f Friend) bool {
 	return false
 }
 
-func (u *Util) InitActivity() []Activity {
+func (u *Util) InitActivities() []Activity {
 	u.FirstFriend = Friend{
 		FirstName: "Ron",
 	}

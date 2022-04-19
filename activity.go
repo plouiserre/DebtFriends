@@ -2,7 +2,7 @@ package main
 
 type Activity struct {
 	Name    string
-	Price   float32
+	Price   float64
 	Friends []Friend
 }
 

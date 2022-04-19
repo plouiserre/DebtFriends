@@ -60,7 +60,7 @@ func TestTripDeterminedFriends(t *testing.T) {
 		Name: "Hogwarts",
 	}
 
-	activities := u.InitActivity()
+	activities := u.InitActivities()
 
 	trip.AddActivities(activities)
 
