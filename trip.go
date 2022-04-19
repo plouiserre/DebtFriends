@@ -21,3 +21,14 @@ func (t *Trip) AddActivities(activities []Activity) {
 	}
 	t.Friends = fs
 }
+
+func (t *Trip) GetActivitiesByPaymaster() map[Friend][]Activity {
+	activitiesByPaymaster := make(map[Friend][]Activity)
+
+	for _, activity := range t.Activities {
+		paymaster := activity.Paymaster
+		activitiesByPaymaster[paymaster] = append(activitiesByPaymaster[paymaster], activity)
+	}
+
+	return activitiesByPaymaster
+}

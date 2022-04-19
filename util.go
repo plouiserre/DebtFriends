@@ -31,34 +31,39 @@ func (u *Util) InitActivities() []Activity {
 	}
 
 	firstActivity := Activity{
-		Name:  "Buy Beers",
-		Price: 23.9,
+		Name:      "Buy Beers",
+		Price:     23.9,
+		Paymaster: u.SecondFriend,
 	}
 
 	firstActivity.AddFriends([]Friend{u.FirstFriend, u.SecondFriend})
 
 	secondActivity := Activity{
-		Name:  "Rent Magic Brooms",
-		Price: 120.7,
+		Name:      "Rent Magic Brooms",
+		Price:     120.7,
+		Paymaster: u.SecondFriend,
 	}
 
 	secondActivity.AddFriends([]Friend{u.ThirdFriend, u.FourthFriend})
 
 	thirdActivity := Activity{
-		Name:  "Buy some presents",
-		Price: 56.98,
+		Name:      "Buy some presents",
+		Price:     56.98,
+		Paymaster: u.FourthFriend,
 	}
 	thirdActivity.AddFriends([]Friend{u.FirstFriend, u.ThirdFriend})
 
 	fourthActivity := Activity{
-		Name:  "Shopping",
-		Price: 278.23,
+		Name:      "Shopping",
+		Price:     278.23,
+		Paymaster: u.FourthFriend,
 	}
 	fourthActivity.AddFriends([]Friend{u.SecondFriend, u.FourthFriend})
 
 	fifthActivity := Activity{
-		Name:  "Bar",
-		Price: 89.66,
+		Name:      "Bar",
+		Price:     89.66,
+		Paymaster: u.FirstFriend,
 	}
 	fifthActivity.AddFriends([]Friend{u.FirstFriend, u.SecondFriend, u.ThirdFriend, u.FourthFriend})
 

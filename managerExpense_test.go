@@ -4,8 +4,6 @@ import (
 	"testing"
 )
 
-//TODO reduce param methods
-
 func TestDetermineEachFriendsExpenses(t *testing.T) {
 	u := Util{}
 	activities := u.InitActivities()
@@ -39,12 +37,4 @@ func GetSpecificFriend(fs []Friend, firstName string) Friend {
 		}
 	}
 	return Friend{}
-}
-
-func CheckFriendExpense(f Friend, value float64) bool {
-	if f.VirtualExpense == value {
-		return true
-	} else {
-		return false
-	}
 }
