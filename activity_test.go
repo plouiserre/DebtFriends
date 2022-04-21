@@ -18,6 +18,20 @@ func TestActivityInit(t *testing.T) {
 }
 
 func TestActivityAddFriends(t *testing.T) {
+	activity := InitActivityWithFriends()
+	if len(activity.Friends) != 3 {
+		t.Fatalf("TestActivityAddFriends fails because Friends of the activity %s have the length %d and %d is waited", activity.Name, len(activity.Friends), 3)
+	}
+}
+
+func TestActivityPayMaster(t *testing.T) {
+	activity := InitActivityWithFriends()
+	if activity.Paymaster.FirstName != "Hermione" {
+		t.Fatalf("TestActivityAddFriends fails because Paymaster of the activity is %s and not %s ", "Hermione", activity.Paymaster.FirstName)
+	}
+}
+
+func InitActivityWithFriends() Activity {
 	activity := Activity{
 		Name:  "Drink Beers",
 		Price: 23.9,
@@ -37,7 +51,7 @@ func TestActivityAddFriends(t *testing.T) {
 
 	activity.AddFriends(friends)
 
-	if len(activity.Friends) != 3 {
-		t.Fatalf("TestActivityAddFriends fails because Friends of the activity %s have the length %d and %d is waited", activity.Name, len(activity.Friends), 3)
-	}
+	activity.Paymaster = secondFriend
+
+	return activity
 }
