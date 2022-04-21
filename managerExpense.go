@@ -37,8 +37,9 @@ func (m *ManagerExpense) PayDebts() {
 				continue
 			}
 			index := m.trip.GetFriendsFromTrip(f.FirstName)
+			friend := &m.trip.Friends[index]
 			isNewPaymentNeed := true
-			for _, payment := range m.trip.Friends[index].Payments {
+			for _, payment := range friend.Payments {
 				if payment.Recipiant.FirstName == paymaster.FirstName {
 					isNewPaymentNeed = false
 					payment.Value += activity.Price / float64(len(activity.Friends))
@@ -49,7 +50,7 @@ func (m *ManagerExpense) PayDebts() {
 					Recipiant: paymaster,
 					Value:     activity.Price / float64(len(activity.Friends)),
 				}
-				m.trip.Friends[index].Payments = append(m.trip.Friends[index].Payments, newPayment)
+				friend.Payments = append(friend.Payments, newPayment)
 			}
 
 		}
