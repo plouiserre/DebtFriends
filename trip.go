@@ -22,13 +22,24 @@ func (t *Trip) AddActivities(activities []Activity) {
 	t.Friends = fs
 }
 
-func (t *Trip) GetActivitiesByPaymaster() map[Friend][]Activity {
-	activitiesByPaymaster := make(map[Friend][]Activity)
+func (t *Trip) GetActivitiesByPaymaster() map[string][]Activity {
+	activitiesByPaymaster := make(map[string][]Activity)
 
 	for _, activity := range t.Activities {
-		paymaster := activity.Paymaster
+		paymaster := activity.Paymaster.FirstName
 		activitiesByPaymaster[paymaster] = append(activitiesByPaymaster[paymaster], activity)
 	}
 
 	return activitiesByPaymaster
+}
+
+func (t *Trip) GetFriendsFromTrip(firstName string) int {
+	var index int
+	for i, f := range t.Friends {
+		if f.FirstName == firstName {
+			index = i
+			break
+		}
+	}
+	return index
 }

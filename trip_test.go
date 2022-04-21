@@ -96,30 +96,36 @@ func TestTripPaymasterByActivities(t *testing.T) {
 
 	ActivitiesByPaymaster := trip.GetActivitiesByPaymaster()
 
-	ronActivities := ActivitiesByPaymaster[u.FirstFriend]
-	hermioneActivities := ActivitiesByPaymaster[u.SecondFriend]
-	nevilleActivities := ActivitiesByPaymaster[u.FourthFriend]
+	ronActivities := ActivitiesByPaymaster[u.FirstFriend.FirstName]
+	hermioneActivities := ActivitiesByPaymaster[u.SecondFriend.FirstName]
+	harryActivities := ActivitiesByPaymaster[u.ThirdFriend.FirstName]
+	nevilleActivities := ActivitiesByPaymaster[u.FourthFriend.FirstName]
 
 	ronActivityCount := len(ronActivities)
 	hermioneActivityCount := len(hermioneActivities)
+	harryActivitiesCount := len(harryActivities)
 	nevilleActivityCount := len(nevilleActivities)
 
-	if ronActivityCount != 1 {
-		t.Fatalf("TestTripPaymasterByActivities fails because Ron has paid %d activity/ies and not %d", 1, ronActivityCount)
+	if ronActivityCount != 2 {
+		t.Fatalf("TestTripPaymasterByActivities fails because Ron has paid %d activity/ies and not %d", 2, ronActivityCount)
 	}
 
-	if hermioneActivityCount != 2 {
-		t.Fatalf("TestTripPaymasterByActivities fails because Hermione has paid %d activity/ies and not %d", 2, hermioneActivityCount)
+	if hermioneActivityCount != 1 {
+		t.Fatalf("TestTripPaymasterByActivities fails because Hermione has paid %d activity/ies and not %d", 1, hermioneActivityCount)
 	}
 
-	if nevilleActivityCount != 2 {
-		t.Fatalf("TestTripPaymasterByActivities fails because Neville has paid %d activity/ies and not %d", 2, nevilleActivityCount)
+	if harryActivitiesCount != 1 {
+		t.Fatalf("TestTripPaymasterByActivities fails because Harry has paid %d activity/ies and not %d", 1, harryActivitiesCount)
 	}
 
+	if nevilleActivityCount != 1 {
+		t.Fatalf("TestTripPaymasterByActivities fails because Neville has paid %d activity/ies and not %d", 1, nevilleActivityCount)
+	}
+
+	AssertSpecificActivity(t, ronActivities, "Buy some presents", "Ron")
 	AssertSpecificActivity(t, ronActivities, "Bar", "Ron")
 	AssertSpecificActivity(t, hermioneActivities, "Buy Beers", "Hermione")
-	AssertSpecificActivity(t, hermioneActivities, "Rent Magic Brooms", "Hermione")
-	AssertSpecificActivity(t, nevilleActivities, "Buy some presents", "Neville")
+	AssertSpecificActivity(t, harryActivities, "Rent Magic Brooms", "Harry")
 	AssertSpecificActivity(t, nevilleActivities, "Shopping", "Neville")
 
 }

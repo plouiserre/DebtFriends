@@ -23,8 +23,15 @@ func main() {
 		fmt.Printf("%s is an activity to the trip %s and cost %f \n", activity.Name, trip.Name, activity.Price)
 	}
 
+	m.PayDebts()
+
 	for _, friend := range trip.Friends {
 		fmt.Printf("%s is a friend of the trip\n", friend.FirstName)
 		fmt.Printf("%s has virtually expensed %.2f\n", friend.FirstName, friend.VirtualExpense)
+
+		for _, payment := range friend.Payments {
+			fmt.Printf("%s must paid %.2f to %s\n", friend.FirstName, payment.Value, payment.Recipiant.FirstName)
+		}
 	}
+
 }
