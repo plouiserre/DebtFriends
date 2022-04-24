@@ -1,7 +1,8 @@
 package main
 
 type ManagerExpense struct {
-	trip Trip
+	trip        Trip
+	friendLinks []FriendLink
 }
 
 func (m *ManagerExpense) DetermineFriendsExpenses() {
@@ -40,10 +41,13 @@ func (m *ManagerExpense) PayDebts() {
 			friend := &m.trip.Friends[index]
 			isNewPaymentNeed := true
 			for _, payment := range friend.Payments {
+				paymentIndex := 0
 				if payment.Recipiant.FirstName == paymaster.FirstName {
 					isNewPaymentNeed = false
 					payment.Value += activity.Price / float64(len(activity.Friends))
+					friend.Payments[paymentIndex].Value = payment.Value
 				}
+				paymentIndex += 1
 			}
 			if isNewPaymentNeed {
 				newPayment := Payment{
@@ -53,6 +57,46 @@ func (m *ManagerExpense) PayDebts() {
 				friend.Payments = append(friend.Payments, newPayment)
 			}
 
+		}
+	}
+}
+
+func (m *ManagerExpense) CreateFriendsLinks() {
+	for _, f := range m.trip.Friends {
+		for _, fr := range m.trip.Friends {
+			var paymentValue float64
+			for _, payment := range f.Payments {
+				if payment.Recipiant.FirstName != fr.FirstName {
+					continue
+				}
+				paymentValue = payment.Value
+			}
+			if paymentValue == 0 {
+				continue
+			}
+			entryExisting := false
+			i := 0
+			for _, fl := range m.friendLinks {
+				isFriendLinkInThisOrder := fl.FirstFriend.FirstName == f.FirstName && fl.SecondFriend.FirstName == fr.FirstName
+				isFriendLinkInOppositeOrder := fl.SecondFriend.FirstName == f.FirstName && fl.FirstFriend.FirstName == fr.FirstName
+
+				if isFriendLinkInThisOrder {
+					m.friendLinks[i].Value += paymentValue
+					entryExisting = true
+				} else if isFriendLinkInOppositeOrder {
+					m.friendLinks[i].Value -= paymentValue
+					entryExisting = true
+				}
+				i += 1
+			}
+			if !entryExisting && paymentValue > 0 {
+				newFriendLink := FriendLink{
+					FirstFriend:  f,
+					SecondFriend: fr,
+					Value:        paymentValue,
+				}
+				m.friendLinks = append(m.friendLinks, newFriendLink)
+			}
 		}
 	}
 }
