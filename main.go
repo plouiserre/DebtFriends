@@ -25,6 +25,12 @@ func main() {
 
 	m.PayDebts()
 
+	m.CreateFriendsLinks()
+
+	for _, friendLink := range m.FriendLinks {
+		fmt.Printf("%s as first friend %s as second friend and %.2f as value \n", friendLink.FirstFriend.FirstName, friendLink.SecondFriend.FirstName, friendLink.Value)
+	}
+
 	for _, friend := range trip.Friends {
 		fmt.Printf("%s is a friend of the trip\n", friend.FirstName)
 		fmt.Printf("%s has virtually expensed %.2f\n", friend.FirstName, friend.VirtualExpense)

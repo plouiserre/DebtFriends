@@ -2,7 +2,7 @@ package main
 
 type ManagerExpense struct {
 	trip        Trip
-	friendLinks []FriendLink
+	FriendLinks []FriendLink
 }
 
 func (m *ManagerExpense) DetermineFriendsExpenses() {
@@ -76,15 +76,15 @@ func (m *ManagerExpense) CreateFriendsLinks() {
 			}
 			entryExisting := false
 			i := 0
-			for _, fl := range m.friendLinks {
+			for _, fl := range m.FriendLinks {
 				isFriendLinkInThisOrder := fl.FirstFriend.FirstName == f.FirstName && fl.SecondFriend.FirstName == fr.FirstName
 				isFriendLinkInOppositeOrder := fl.SecondFriend.FirstName == f.FirstName && fl.FirstFriend.FirstName == fr.FirstName
 
 				if isFriendLinkInThisOrder {
-					m.friendLinks[i].Value += paymentValue
+					m.FriendLinks[i].Value += paymentValue
 					entryExisting = true
 				} else if isFriendLinkInOppositeOrder {
-					m.friendLinks[i].Value -= paymentValue
+					m.FriendLinks[i].Value -= paymentValue
 					entryExisting = true
 				}
 				i += 1
@@ -95,7 +95,7 @@ func (m *ManagerExpense) CreateFriendsLinks() {
 					SecondFriend: fr,
 					Value:        paymentValue,
 				}
-				m.friendLinks = append(m.friendLinks, newFriendLink)
+				m.FriendLinks = append(m.FriendLinks, newFriendLink)
 			}
 		}
 	}

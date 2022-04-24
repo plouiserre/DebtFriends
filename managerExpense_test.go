@@ -101,21 +101,21 @@ func TestCreateFriendsLinks(t *testing.T) {
 
 	m.CreateFriendsLinks()
 
-	FriendLinksCount := len(m.friendLinks)
+	FriendLinksCount := len(m.FriendLinks)
 
 	if FriendLinksCount != 5 {
 		t.Fatalf("TestRefundFriends fails because  there is 5 FriendsLinks and not %d ", FriendLinksCount)
 	}
 
-	AssertCreationFriendsLinks(t, m.friendLinks[0], u.FirstFriend, u.SecondFriend, "The first link between Ron and Hermione is failing", -10.465)
+	AssertCreationFriendsLinks(t, m.FriendLinks[0], u.FirstFriend, u.SecondFriend, "The first link between Ron and Hermione is failing", -10.465)
 
-	AssertCreationFriendsLinks(t, m.friendLinks[1], u.SecondFriend, u.FourthFriend, "The second link between Hermione and Neville is failing", 139.115)
+	AssertCreationFriendsLinks(t, m.FriendLinks[1], u.SecondFriend, u.FourthFriend, "The second link between Hermione and Neville is failing", 139.115)
 
-	AssertCreationFriendsLinks(t, m.friendLinks[2], u.ThirdFriend, u.FirstFriend, "The third link between Harry and Ron is failing", 50.905)
+	AssertCreationFriendsLinks(t, m.FriendLinks[2], u.ThirdFriend, u.FirstFriend, "The third link between Harry and Ron is failing", 50.905)
 
-	AssertCreationFriendsLinks(t, m.friendLinks[3], u.FourthFriend, u.FirstFriend, "The fourth link between Neville and Ron is failing", 22.415)
+	AssertCreationFriendsLinks(t, m.FriendLinks[3], u.FourthFriend, u.FirstFriend, "The fourth link between Neville and Ron is failing", 22.415)
 
-	AssertCreationFriendsLinks(t, m.friendLinks[4], u.FourthFriend, u.ThirdFriend, "The fifth link between Neville and Harry is failing", 60.35)
+	AssertCreationFriendsLinks(t, m.FriendLinks[4], u.FourthFriend, u.ThirdFriend, "The fifth link between Neville and Harry is failing", 60.35)
 }
 
 func AssertCreationFriendsLinks(t *testing.T, fL FriendLink, firstFriend Friend, secondFriend Friend, messageError string, value float64) {
