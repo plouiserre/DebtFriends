@@ -125,6 +125,18 @@ func (m *ManagerExpense) MaximizeExpense() {
 		}
 	}
 	//TODO à améliorer
+	for i, f := range m.trip.Friends {
+		for j, p := range f.Payments {
+			if p.Value == 0 {
+				payments := m.trip.Friends[i].Payments
+				payments = append(payments[:j], payments[j+1:]...)
+				m.trip.Friends[i].Payments = payments
+			} else {
+				continue
+			}
+
+		}
+	}
 	//removeIt(paymentToDelete, m.trip.Friends[friendToModify].Payments)
 }
 

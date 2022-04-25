@@ -144,10 +144,7 @@ func TestMaximizeExpense(t *testing.T) {
 	m.MaximizeExpense()
 
 	ronPayments := m.trip.Friends[0].Payments
-	AssertPaymentTimes(ronPayments, 1, t, "Ron")
-	if ronPayments[0].Recipiant.FirstName != "Hermione" && ronPayments[0].Value != 0 {
-		t.Fatalf("TestCreateFriendLinks fails because  Hermione must paid 0 to Hermione and not %f to %s ", ronPayments[0].Value, ronPayments[0].Recipiant.FirstName)
-	}
+	AssertPaymentTimes(ronPayments, 0, t, "Ron")
 
 	hermionePayment := m.trip.Friends[1].Payments
 	AssertPaymentTimes(hermionePayment, 2, t, "Hermione")
