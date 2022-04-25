@@ -100,3 +100,41 @@ func (m *ManagerExpense) CreateFriendsLinks() {
 		}
 	}
 }
+
+func (m *ManagerExpense) MaximizeExpense() {
+	//var paymentToDelete Payment
+	//var friendToModify int
+	for _, fl := range m.FriendLinks {
+		for _, f := range m.trip.Friends {
+			if f.FirstName != fl.FirstFriend.FirstName {
+				continue
+			}
+			for j, p := range f.Payments {
+				if p.Recipiant.FirstName != fl.SecondFriend.FirstName {
+					continue
+				}
+				if fl.Value < 0 {
+					//m.trip.Friends[i].Payments = append(m.trip.Friends[i].Payments[:j], m.trip.Friends[i].Payments[:j+1]...)
+					//paymentToDelete = m.trip.Friends[i].Payments[j]
+					//friendToModify = i
+					f.Payments[j].Value = 0
+					continue
+				}
+				f.Payments[j].Value = fl.Value
+			}
+		}
+	}
+	//TODO à améliorer
+	//removeIt(paymentToDelete, m.trip.Friends[friendToModify].Payments)
+}
+
+//TODO à se débarrasser après
+func removeIt(ss Payment, ssSlice []Payment) []Payment {
+	for idx, v := range ssSlice {
+		if v.Recipiant.FirstName == ss.Recipiant.FirstName {
+			test := append(ssSlice[0:idx], ssSlice[idx+1:]...)
+			return test
+		}
+	}
+	return ssSlice
+}

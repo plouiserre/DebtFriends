@@ -125,7 +125,7 @@ func AssertCreationFriendsLinks(t *testing.T, fL FriendLink, firstFriend Friend,
 	}
 }
 
-/*func TestMaximizeExpense(t *testing.T) {
+func TestMaximizeExpense(t *testing.T) {
 	u := Util{}
 	activities := u.InitActivities()
 	trip := Trip{
@@ -139,10 +139,15 @@ func AssertCreationFriendsLinks(t *testing.T, fL FriendLink, firstFriend Friend,
 
 	m.PayDebts()
 
+	m.CreateFriendsLinks()
+
 	m.MaximizeExpense()
 
 	ronPayments := m.trip.Friends[0].Payments
-	AssertPaymentTimes(ronPayments, 0, t, "Ron")
+	AssertPaymentTimes(ronPayments, 1, t, "Ron")
+	if ronPayments[0].Recipiant.FirstName != "Hermione" && ronPayments[0].Value != 0 {
+		t.Fatalf("TestCreateFriendLinks fails because  Hermione must paid 0 to Hermione and not %f to %s ", ronPayments[0].Value, ronPayments[0].Recipiant.FirstName)
+	}
 
 	hermionePayment := m.trip.Friends[1].Payments
 	AssertPaymentTimes(hermionePayment, 2, t, "Hermione")
@@ -167,7 +172,7 @@ func AssertCreationFriendsLinks(t *testing.T, fL FriendLink, firstFriend Friend,
 	if nevillePayment[1].Recipiant.FirstName != "Ron" && nevillePayment[1].Value != 22.415 {
 		t.Fatalf("TestCreateFriendLinks fails because  Neville must paid 22.415 to Ron and not %f to %s ", nevillePayment[1].Value, nevillePayment[1].Recipiant.FirstName)
 	}
-}*/
+}
 
 //TODO reprendre cette méthode
 func AssertPaymentTimes(payments []Payment, numberPaymentWaited int, t *testing.T, friendName string) {
