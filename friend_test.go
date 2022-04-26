@@ -10,9 +10,6 @@ func TestFriendNameExpense(t *testing.T) {
 	if friend.FirstName != "Harry" {
 		t.Fatalf("TestFriendNameExpense fail because his/her firstname is not equal to %s but to %s", "Harry", friend.FirstName)
 	}
-	if friend.VirtualExpense != 298.23 {
-		t.Fatalf("TestFriendNameExpense fail because his/her expense is not equal to %s but to %f", "Harry", friend.VirtualExpense)
-	}
 }
 
 func TestFriendPayments(t *testing.T) {
@@ -25,8 +22,7 @@ func TestFriendPayments(t *testing.T) {
 
 func InitFriend(payments []Payment) Friend {
 	friend := Friend{
-		FirstName:      "Harry",
-		VirtualExpense: 298.23,
+		FirstName: "Harry",
 	}
 	if len(payments) > 0 {
 		friend.Payments = payments
@@ -36,13 +32,11 @@ func InitFriend(payments []Payment) Friend {
 
 func TestFriendLink(t *testing.T) {
 	firstFriend := Friend{
-		FirstName:      "Harry",
-		VirtualExpense: 0,
+		FirstName: "Harry",
 	}
 
 	secondFriend := Friend{
-		FirstName:      "Hermione",
-		VirtualExpense: 0,
+		FirstName: "Hermione",
 	}
 	friendLink := FriendLink{
 		FirstFriend:  firstFriend,
